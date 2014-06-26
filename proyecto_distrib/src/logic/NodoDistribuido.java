@@ -72,7 +72,7 @@ public class NodoDistribuido extends Thread{
         byte[] mybytearray = new byte[Integer.parseInt(t)];
         InputStream is = conexion.getSocket().getInputStream();
         JFileChooser j=new JFileChooser();
-        j.showOpenDialog(null);
+        j.showSaveDialog(null);
         FileOutputStream fos = new FileOutputStream(j.getSelectedFile().getPath());
         BufferedOutputStream bos = new BufferedOutputStream(fos);
         int bytesRead = is.read(mybytearray, 0, mybytearray.length);
