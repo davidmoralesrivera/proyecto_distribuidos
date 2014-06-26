@@ -29,7 +29,6 @@ public class MainProyecto {
                  }
             }
             
-            
         } catch (IOException ex) {
             ex.printStackTrace();
         }
