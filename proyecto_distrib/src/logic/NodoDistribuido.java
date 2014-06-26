@@ -1,13 +1,14 @@
 
 package logic;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 
 /**
  *
@@ -65,6 +66,31 @@ public class NodoDistribuido extends Thread{
         }
     }
     
+    public void recibirArchivo(Conexion conexion) throws FileNotFoundException, IOException{
+        byte[] mybytearray = new byte[10000];
+        InputStream is = conexion.getSocket().getInputStream();
+        JFileChooser j=new JFileChooser();
+        j.showOpenDialog(null);
+        FileOutputStream fos = new FileOutputStream(j.getSelectedFile().getPath());
+        BufferedOutputStream bos = new BufferedOutputStream(fos);
+        int bytesRead = is.read(mybytearray, 0, mybytearray.length);
+        bos.write(mybytearray, 0, bytesRead);
+        bos.close();
+    }
+    
+    public void enviarArchivo(Conexion conexion) throws FileNotFoundException, IOException{
+        JFileChooser j=new JFileChooser();
+        j.showOpenDialog(null);
+        conexion.enviarMensaje("setFile");
+        File myFile = j.getSelectedFile();
+        byte[] mybytearray = new byte[(int) myFile.length()];
+        BufferedInputStream bis = new BufferedInputStream(new FileInputStream(myFile));
+        bis.read(mybytearray, 0, mybytearray.length);
+        OutputStream os = conexion.getSocket().getOutputStream();
+        os.write(mybytearray, 0, mybytearray.length);
+        os.flush();
+    }
+    
     public void procesar(String comando,Conexion conexion){
         String com = comando.split(";")[0];
         if(com.equals("setIps")){
@@ -77,6 +103,19 @@ public class NodoDistribuido extends Thread{
             }
         }else if(com.equals("getIps")){
             conexion.enviarMensaje("setIps;"+ipsAsStrings());
+        }else if(com.equals("getFile")){
+            try {
+                enviarArchivo(conexion);
+                
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }else if(com.equals("setFile")){
+            try {
+                recibirArchivo(conexion);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         }
     }
 

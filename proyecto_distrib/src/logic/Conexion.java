@@ -47,6 +47,9 @@ public class Conexion extends Thread{
 //        }
 //        return null;
 //    }
+    public byte[] leerArchivo(){
+        return null;
+    }
     
     public String leerMensaje(){
         try {
