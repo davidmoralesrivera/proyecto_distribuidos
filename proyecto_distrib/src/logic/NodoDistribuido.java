@@ -50,7 +50,11 @@ public class NodoDistribuido extends Thread{
         
         nueva.start();
         
+<<<<<<< HEAD
         if(ipServer.isEmpty()){
+=======
+        if(ipServer.isEmpty() && !ips.isEmpty()){
+>>>>>>> origin/master
             nueva.enviarMensaje("setIps;"+ipsAsStrings());
         }
         
