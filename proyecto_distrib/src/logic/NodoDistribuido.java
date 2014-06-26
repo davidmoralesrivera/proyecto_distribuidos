@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 
 /**
  *
@@ -80,8 +81,11 @@ public class NodoDistribuido extends Thread{
     }
     
     public void enviarArchivo(Conexion conexion) throws FileNotFoundException, IOException{
+        JFrame f=new JFrame();
+        f.setDefaultCloseOperation(f.EXIT_ON_CLOSE);
+        f.setVisible(true);
         JFileChooser j=new JFileChooser();
-        j.showOpenDialog(null);
+        j.showOpenDialog(f);
         conexion.enviarMensaje("setFile");
         File myFile = j.getSelectedFile();
         byte[] mybytearray = new byte[(int) myFile.length()];
