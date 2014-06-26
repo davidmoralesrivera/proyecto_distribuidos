@@ -112,12 +112,12 @@ public class NodoDistribuido extends Thread{
             try {
                 enviarArchivo(conexion);
                 
+                
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
         }else if(com.equals("setFile")){
             try {
-                conexion.setRecibiendo(true);
                 recibirArchivo(conexion,comando.split(";")[1]);
             } catch (Exception ex) {
                 ex.printStackTrace();

@@ -21,6 +21,12 @@ public class Conexion extends Thread{
         this.socket=socket;
         in =new DataInputStream(socket.getInputStream());
         out = new DataOutputStream(socket.getOutputStream());
+        while(conectado){
+            while(true){
+                 pertenece.procesar(leerMensaje(),this);
+            }
+           
+        }
     }
     
     public void enviarMensaje(String mensaje){
@@ -62,12 +68,7 @@ public class Conexion extends Thread{
 
     @Override
     public void run() {
-        while(conectado){
-            while(!recibiendo){
-                 pertenece.procesar(leerMensaje(),this);
-            }
-           
-        }
+        
     }
     
 
