@@ -1,9 +1,7 @@
 
 package logic;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.Socket;
 
 /**
@@ -12,16 +10,16 @@ import java.net.Socket;
  */
 public class Conexion extends Thread{
     private Socket socket;
-    private ObjectInputStream in;
-    private ObjectOutputStream out;
+    private DataInputStream in;
+    private DataOutputStream out;
     private boolean conectado=true;
     private NodoDistribuido pertenece;
 
     public Conexion(Socket socket,NodoDistribuido nd) throws IOException {
         pertenece = nd;
         this.socket=socket;
-        in =new ObjectInputStream(socket.getInputStream());
-        out = new ObjectOutputStream(socket.getOutputStream());
+        in =new DataInputStream(socket.getInputStream());
+        out = new DataOutputStream(socket.getOutputStream());
     }
     
     public void enviarMensaje(String mensaje){
@@ -33,22 +31,22 @@ public class Conexion extends Thread{
         }
     }
     
-    public void enviarObjeto(Object o){
-        try {
-            out.writeObject(o);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
-    
-    public Object leerObjeto(){
-        try {
-            return in.readObject();
-        } catch (IOException | ClassNotFoundException ex) {
-            ex.printStackTrace();
-        }
-        return null;
-    }
+//    public void enviarObjeto(Object o){
+//        try {
+//            out.writeObject(o);
+//        } catch (IOException ex) {
+//            ex.printStackTrace();
+//        }
+//    }
+//    
+//    public Object leerObjeto(){
+//        try {
+//            return in.readObject();
+//        } catch (IOException | ClassNotFoundException ex) {
+//            ex.printStackTrace();
+//        }
+//        return null;
+//    }
     
     public String leerMensaje(){
         try {
@@ -67,21 +65,21 @@ public class Conexion extends Thread{
     }
     
 
-    public ObjectInputStream getIn() {
-        return in;
-    }
-
-    public void setIn(ObjectInputStream in) {
-        this.in = in;
-    }
-
-    public ObjectOutputStream getOut() {
-        return out;
-    }
-
-    public void setOut(ObjectOutputStream out) {
-        this.out = out;
-    }
+//    public ObjectInputStream getIn() {
+//        return in;
+//    }
+//
+//    public void setIn(ObjectInputStream in) {
+//        this.in = in;
+//    }
+//
+//    public ObjectOutputStream getOut() {
+//        return out;
+//    }
+//
+//    public void setOut(ObjectOutputStream out) {
+//        this.out = out;
+//    }
 
     public Socket getSocket() {
         return socket;
