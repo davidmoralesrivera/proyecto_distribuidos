@@ -20,6 +20,7 @@ public class NodoDistribuido extends Thread{
     private ArrayList<Conexion> conexiones;
     private boolean activo=true;
     private int puerto;
+    private String ipServer;
     
     public NodoDistribuido(int port,String serverIp) throws IOException {
         serverSocket = new ServerSocket(port);
@@ -27,6 +28,7 @@ public class NodoDistribuido extends Thread{
         ips = new ArrayList<String>();
         conexiones = new ArrayList<Conexion>();
         this.start();
+        ipServer=serverIp;
         if(!serverIp.equals("")){
             agregarConexion(new Socket(serverIp,port));
         }
@@ -47,7 +49,10 @@ public class NodoDistribuido extends Thread{
         conexiones.add(nueva);
         
         nueva.start();
-        nueva.enviarMensaje("setIps;"+ipsAsStrings());
+        
+        if(!ipServer.isEmpty()){
+            nueva.enviarMensaje("setIps;"+ipsAsStrings());
+        }
         
         ips.add(socket.getInetAddress().getHostAddress());
     }
