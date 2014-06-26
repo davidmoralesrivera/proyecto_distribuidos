@@ -94,6 +94,7 @@ public class NodoDistribuido extends Thread{
         OutputStream os = conexion.getSocket().getOutputStream();
         os.write(mybytearray, 0, mybytearray.length);
         os.flush();
+        conexion.setRecibiendo(false);
     }
     
     public void procesar(String comando,Conexion conexion){
