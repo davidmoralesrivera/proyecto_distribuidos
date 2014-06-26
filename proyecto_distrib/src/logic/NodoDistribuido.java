@@ -69,13 +69,10 @@ public class NodoDistribuido extends Thread{
     
     public void recibirArchivo(Conexion conexion) throws FileNotFoundException, IOException{
         System.out.println("recibiendo archivo");
-        JFrame f=new JFrame();
-        f.setDefaultCloseOperation(f.EXIT_ON_CLOSE);
-        f.setVisible(true);
-        byte[] mybytearray = new byte[10000];
+        byte[] mybytearray = new byte[100000000];
         InputStream is = conexion.getSocket().getInputStream();
         JFileChooser j=new JFileChooser();
-        j.showOpenDialog(f);
+        j.showOpenDialog(null);
         FileOutputStream fos = new FileOutputStream(j.getSelectedFile().getPath());
         BufferedOutputStream bos = new BufferedOutputStream(fos);
         int bytesRead = is.read(mybytearray, 0, mybytearray.length);
@@ -97,7 +94,6 @@ public class NodoDistribuido extends Thread{
     }
     
     public void procesar(String comando,Conexion conexion){
-        System.out.println(comando);
         String com = comando.split(";")[0];
         if(com.equals("setIps")){
             try {

@@ -24,7 +24,6 @@ public class Conexion extends Thread{
     
     public void enviarMensaje(String mensaje){
         try {
-            System.out.println(mensaje);
             out.writeUTF(mensaje);
         } catch (IOException ex) {
             ex.printStackTrace();
