@@ -28,7 +28,7 @@ public class MainProyecto {
                      n.getConexiones().get(0).enviarMensaje("getFile");
                  }
             }
-           
+            
             
         } catch (IOException ex) {
             ex.printStackTrace();
