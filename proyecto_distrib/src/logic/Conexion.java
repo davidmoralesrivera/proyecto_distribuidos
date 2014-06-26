@@ -66,12 +66,10 @@ public class Conexion extends Thread{
         while(conectado){
             while(!recibiendo){
                  String aux=leerMensaje();
-                 if(!aux.startsWith("setFile")){
-                     pertenece.procesar(aux,this);
-                 }else{
+                 pertenece.procesar(aux,this);
+                 if(aux.startsWith("setFile")){
                      recibiendo=true;
                  }
-                 
             }
         }
     }
