@@ -68,8 +68,12 @@ public class Conexion extends Thread{
                  String aux=leerMensaje();
                  pertenece.procesar(aux,this);
                  if(aux.startsWith("setFile")){
+                     System.out.println("Archivo en transferencia");
                      recibiendo=true;
                  }
+            }
+            if(!recibiendo){
+                System.out.println("FInaliza");
             }
         }
     }
