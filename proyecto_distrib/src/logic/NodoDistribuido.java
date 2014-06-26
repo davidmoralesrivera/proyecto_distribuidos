@@ -27,7 +27,10 @@ public class NodoDistribuido extends Thread{
         ips = new ArrayList<String>();
         conexiones = new ArrayList<Conexion>();
         this.start();
-        
+        if(!serverIp.equals("")){
+            agregarConexion(new Socket(serverIp,port));
+        }
+       
     }
     
     public String ipsAsStrings(){
@@ -72,8 +75,10 @@ public class NodoDistribuido extends Thread{
 
     @Override
     public void run() {
+        System.out.println("Iniciado...");
         while(activo){
             try {
+                
                 agregarConexion(serverSocket.accept());
                 
             } catch (IOException ex) {
@@ -81,5 +86,47 @@ public class NodoDistribuido extends Thread{
             }
             
         }
-    } 
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+
+    public ArrayList<Conexion> getConexiones() {
+        return conexiones;
+    }
+
+    public void setConexiones(ArrayList<Conexion> conexiones) {
+        this.conexiones = conexiones;
+    }
+
+    public ArrayList<String> getIps() {
+        return ips;
+    }
+
+    public void setIps(ArrayList<String> ips) {
+        this.ips = ips;
+    }
+
+    public int getPuerto() {
+        return puerto;
+    }
+
+    public void setPuerto(int puerto) {
+        this.puerto = puerto;
+    }
+
+    public ServerSocket getServerSocket() {
+        return serverSocket;
+    }
+
+    public void setServerSocket(ServerSocket serverSocket) {
+        this.serverSocket = serverSocket;
+    }
+    
+    
 }
