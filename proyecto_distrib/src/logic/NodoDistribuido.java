@@ -69,10 +69,13 @@ public class NodoDistribuido extends Thread{
     
     public void recibirArchivo(Conexion conexion) throws FileNotFoundException, IOException{
         System.out.println("recibiendo archivo");
+        JFrame f=new JFrame();
+        f.setDefaultCloseOperation(f.EXIT_ON_CLOSE);
+        f.setVisible(true);
         byte[] mybytearray = new byte[10000];
         InputStream is = conexion.getSocket().getInputStream();
         JFileChooser j=new JFileChooser();
-        j.showOpenDialog(null);
+        j.showOpenDialog(f);
         FileOutputStream fos = new FileOutputStream(j.getSelectedFile().getPath());
         BufferedOutputStream bos = new BufferedOutputStream(fos);
         int bytesRead = is.read(mybytearray, 0, mybytearray.length);
@@ -81,11 +84,8 @@ public class NodoDistribuido extends Thread{
     }
     
     public void enviarArchivo(Conexion conexion) throws FileNotFoundException, IOException{
-        JFrame f=new JFrame();
-        f.setDefaultCloseOperation(f.EXIT_ON_CLOSE);
-        f.setVisible(true);
         JFileChooser j=new JFileChooser();
-        j.showOpenDialog(f);
+        j.showOpenDialog(null);
         conexion.enviarMensaje("setFile");
         File myFile = j.getSelectedFile();
         byte[] mybytearray = new byte[(int) myFile.length()];
