@@ -93,6 +93,7 @@ public class NodoDistribuido extends Thread{
     }
     
     public void procesar(String comando,Conexion conexion){
+        System.out.println(comando);
         String com = comando.split(";")[0];
         if(com.equals("setIps")){
             try {
