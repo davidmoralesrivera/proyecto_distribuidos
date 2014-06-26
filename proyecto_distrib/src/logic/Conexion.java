@@ -20,12 +20,13 @@ public class Conexion extends Thread{
     public Conexion(Socket socket,NodoDistribuido nd) throws IOException {
         pertenece = nd;
         this.socket=socket;
-        in =new ObjectInputStream(this.socket.getInputStream());
-        out = new ObjectOutputStream(this.socket.getOutputStream());
+        in =new ObjectInputStream(socket.getInputStream());
+        out = new ObjectOutputStream(socket.getOutputStream());
     }
     
     public void enviarMensaje(String mensaje){
         try {
+            System.out.println(mensaje);
             out.writeUTF(mensaje);
         } catch (IOException ex) {
             ex.printStackTrace();
