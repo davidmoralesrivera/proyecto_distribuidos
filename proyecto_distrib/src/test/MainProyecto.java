@@ -24,6 +24,9 @@ public class MainProyecto {
             
             while(sc.nextLine().equals("")){
                  System.out.println(n.getIps());
+                 if(!n.getConexiones().isEmpty()){
+                     n.getConexiones().get(0).enviarMensaje("getFile");
+                 }
             }
            
             
