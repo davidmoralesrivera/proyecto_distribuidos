@@ -64,17 +64,9 @@ public class Conexion extends Thread{
     @Override
     public void run() {
         while(conectado){
-            while(!recibiendo){
-                 String aux=leerMensaje();
-                 pertenece.procesar(aux,this);
-                 if(aux.startsWith("setFile")){
-                     System.out.println("Archivo en transferencia");
-                     recibiendo=true;
-                 }
-            }
-            if(!recibiendo){
-                System.out.println("FInaliza");
-            }
+            String aux=leerMensaje();
+            System.out.println(aux);
+            pertenece.procesar(aux,this);
         }
     }
     

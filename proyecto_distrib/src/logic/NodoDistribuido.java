@@ -79,7 +79,6 @@ public class NodoDistribuido extends Thread{
         System.out.println(bytesRead);
         bos.write(mybytearray, 0, bytesRead);
         bos.close();
-        conexion.setRecibiendo(false);
     }
     
     public void enviarArchivo(Conexion conexion) throws FileNotFoundException, IOException{
