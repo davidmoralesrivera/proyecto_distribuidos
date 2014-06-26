@@ -79,6 +79,7 @@ public class NodoDistribuido extends Thread{
         System.out.println(bytesRead);
         bos.write(mybytearray, 0, bytesRead);
         bos.close();
+        conexion.setRecibiendo(false);
     }
     
     public void enviarArchivo(Conexion conexion) throws FileNotFoundException, IOException{
@@ -116,6 +117,7 @@ public class NodoDistribuido extends Thread{
             }
         }else if(com.equals("setFile")){
             try {
+                conexion.setRecibiendo(true);
                 recibirArchivo(conexion,comando.split(";")[1]);
             } catch (Exception ex) {
                 ex.printStackTrace();

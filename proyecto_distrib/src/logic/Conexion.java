@@ -13,6 +13,7 @@ public class Conexion extends Thread{
     private DataInputStream in;
     private DataOutputStream out;
     private boolean conectado=true;
+    private boolean recibiendo=false;
     private NodoDistribuido pertenece;
 
     public Conexion(Socket socket,NodoDistribuido nd) throws IOException {
@@ -62,7 +63,10 @@ public class Conexion extends Thread{
     @Override
     public void run() {
         while(conectado){
-            pertenece.procesar(leerMensaje(),this);
+            while(!recibiendo){
+                 pertenece.procesar(leerMensaje(),this);
+            }
+           
         }
     }
     
@@ -89,6 +93,46 @@ public class Conexion extends Thread{
 
     public void setSocket(Socket socket) {
         this.socket = socket;
+    }
+
+    public boolean isConectado() {
+        return conectado;
+    }
+
+    public void setConectado(boolean conectado) {
+        this.conectado = conectado;
+    }
+
+    public DataInputStream getIn() {
+        return in;
+    }
+
+    public void setIn(DataInputStream in) {
+        this.in = in;
+    }
+
+    public DataOutputStream getOut() {
+        return out;
+    }
+
+    public void setOut(DataOutputStream out) {
+        this.out = out;
+    }
+
+    public NodoDistribuido getPertenece() {
+        return pertenece;
+    }
+
+    public void setPertenece(NodoDistribuido pertenece) {
+        this.pertenece = pertenece;
+    }
+
+    public boolean isRecibiendo() {
+        return recibiendo;
+    }
+
+    public void setRecibiendo(boolean recibiendo) {
+        this.recibiendo = recibiendo;
     }
 
     
